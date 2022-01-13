@@ -34,11 +34,17 @@ mainsurface.fill((255, 255, 255))
 # the screen (BRICK_Y_OFFSET)
 x_pos = BRICK_SEP
 y_pos = BRICK_Y_OFFSET
-for x in range(BRICKS_PER_ROW):
-   b = brick.Brick(BRICK_WIDTH, BRICK_HEIGHT, RED)
-   b.rect.x = x_pos
-   b.rect.y = y_pos
-   mainsurface.blit(b.image, b.rect)
+for z in [RED, ORANGE, YELLOW, GREEN, CYAN]:
+    for y in range(2):
+        for x in range(BRICKS_PER_ROW):
+           b = brick.Brick(BRICK_WIDTH, BRICK_HEIGHT, z)
+           b.rect.x = x_pos
+           b.rect.y = y_pos
+           mainsurface.blit(b.image, b.rect)
+           x_pos = x_pos + BRICK_WIDTH + BRICK_SEP
+        y_pos = y_pos + BRICK_HEIGHT + 4
+        x_pos = BRICK_SEP
+
 
 while True:
    for event in pygame.event.get():
