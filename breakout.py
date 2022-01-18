@@ -1,5 +1,6 @@
 import pygame, sys
 import brick
+import paddle
 from pygame.locals import *
 
 # Constants that will be used in the program
@@ -44,6 +45,15 @@ for z in [RED, ORANGE, YELLOW, GREEN, CYAN]:
            x_pos = x_pos + BRICK_WIDTH + BRICK_SEP
         y_pos = y_pos + BRICK_HEIGHT + 4
         x_pos = BRICK_SEP
+
+p = paddle.Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, BLACK)
+p.rect.y = y_pos
+mainsurface.blit(p.image, p.rect)
+y_pos = y_pos + APPLICATION_HEIGHT
+
+
+
+
 
 
 while True:
