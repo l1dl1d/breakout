@@ -1,6 +1,7 @@
 import pygame, sys
 import brick
 import paddle
+import ball
 from pygame.locals import *
 
 # Constants that will be used in the program
@@ -35,30 +36,30 @@ mainsurface.fill((255, 255, 255))
 # the screen (BRICK_Y_OFFSET)
 x_pos = BRICK_SEP
 y_pos = BRICK_Y_OFFSET
+bricks = pygame.sprite.Group()
 for z in [RED, ORANGE, YELLOW, GREEN, CYAN]:
     for y in range(2):
         for x in range(BRICKS_PER_ROW):
            b = brick.Brick(BRICK_WIDTH, BRICK_HEIGHT, z)
+           bricks.add(b)
            b.rect.x = x_pos
            b.rect.y = y_pos
            mainsurface.blit(b.image, b.rect)
            x_pos = x_pos + BRICK_WIDTH + BRICK_SEP
         y_pos = y_pos + BRICK_HEIGHT + 4
         x_pos = BRICK_SEP
-
 p = paddle.Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, BLACK)
-p.rect.y = y_pos
+p.rect.y = y_pos + 400 - PADDLE_Y_OFFSET
+p.rect.x = x_pos + APPLICATION_WIDTH/2 - 35
 mainsurface.blit(p.image, p.rect)
-y_pos = y_pos + APPLICATION_HEIGHT
-
-
-
-
-
-
 while True:
-   for event in pygame.event.get():
+    mainsurface.fill(WHITE)
+    for x in bricks:
+        mainsurface.blit(x.image, x.rect)
+    p.move()
+    mainsurface.blit(p.image, p.rect)
+    for event in pygame.event.get():
        if event.type == QUIT:
            pygame.quit()
            sys.exit()
-   pygame.display.update()
+    pygame.display.update()
