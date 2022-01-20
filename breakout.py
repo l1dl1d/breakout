@@ -53,17 +53,17 @@ p = paddle.Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, BLACK)
 p.rect.y = y_pos + 400 - PADDLE_Y_OFFSET
 p.rect.x = x_pos + APPLICATION_WIDTH/2 - 35
 mainsurface.blit(p.image, p.rect)
-
-vx = random.randint(1, 3)
-if random.random() > 0.5:
-    vx = -vx
-
+red_ball = ball.Ball(BLACK, APPLICATION_WIDTH, APPLICATION_HEIGHT, RADIUS_OF_BALL)
+red_ball.rect.y = APPLICATION_HEIGHT/2
+red_ball.rect.x = APPLICATION_WIDTH/2
 while True:
     mainsurface.fill(WHITE)
     for x in bricks:
         mainsurface.blit(x.image, x.rect)
     p.move()
     mainsurface.blit(p.image, p.rect)
+    red_ball.move()
+    mainsurface.blit(red_ball.image, red_ball.rect)
     for event in pygame.event.get():
        if event.type == QUIT:
            pygame.quit()
