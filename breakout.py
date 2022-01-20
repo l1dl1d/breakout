@@ -1,6 +1,7 @@
 import pygame, sys
 import brick
 import paddle
+import random
 import ball
 from pygame.locals import *
 
@@ -52,6 +53,11 @@ p = paddle.Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, BLACK)
 p.rect.y = y_pos + 400 - PADDLE_Y_OFFSET
 p.rect.x = x_pos + APPLICATION_WIDTH/2 - 35
 mainsurface.blit(p.image, p.rect)
+
+vx = random.randint(1, 3)
+if random.random() > 0.5:
+    vx = -vx
+
 while True:
     mainsurface.fill(WHITE)
     for x in bricks:

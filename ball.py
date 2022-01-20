@@ -27,6 +27,9 @@ class Ball(pygame.sprite.Sprite):
     def move(self):
         self.rect.x += self.x_speed
         self.rect.x += self.x_speed
-        if
-        if pygame.sprite.Spritecollide(self, group, True):
+        if self.rect.left < 0 or self.rect.right > self.mainsurface.get_width():
+            self.x_speed = -self.x_speed
+        if self.rect.top < 0 or self.rect.bottom > self.mainsurface.get_height():
+            self.y_speed = -self.y_speed
+        if pygame.sprite.Spritecollide(self, True):
             self.y_speed = self.y_speed
