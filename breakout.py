@@ -67,7 +67,7 @@ while True:
     red_ball.move()
     mainsurface.blit(red_ball.image, red_ball.rect)
     red_ball.collide(black_paddle)
-    red_ball.collide(bricks)
+    red_ball.collide_bricks(bricks)
     for event in pygame.event.get():
        if event.type == QUIT:
            pygame.quit()
