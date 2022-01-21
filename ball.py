@@ -11,8 +11,8 @@ class Ball(pygame.sprite.Sprite):
         self.windowWidth = windowWidth
         self.windowHeight = windowHeight
         self.radius = radius
-        self.x_speed = 1
-        self.y_speed = 1
+        self.x_speed = 3
+        self.y_speed = 5
 
         # Create a surface, get the rect coordinates, fill the surface with a white color (or whatever color the
         # background of your breakout game will be.
@@ -33,6 +33,10 @@ class Ball(pygame.sprite.Sprite):
         if self.rect.top < 0 or self.rect.bottom > self.windowHeight:
             self.y_speed = -self.y_speed
 
-    def collide(self):
-        if pygame.sprite.Spritecollide(self, True):
-            self.y_speed = self.y_speed
+    def collide(self, p):
+        if pygame.sprite.spritecollide(self, p, False):
+            self.y_speed = -self.y_speed
+
+    def collide_bricks(self, b):
+        if pygame.sprite.spritecollide(self, b, True):
+            self.y_speed = -self.y_speed

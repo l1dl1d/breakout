@@ -18,7 +18,7 @@ PADDLE_WIDTH = 60
 PADDLE_HEIGHT = 10
 RADIUS_OF_BALL = 10
 NUM_TURNS = 3
-
+time = pygame.time.Clock()
 # Sets up the colors
 RED = (255, 0, 0)
 ORANGE = (255, 165, 0)
@@ -38,6 +38,7 @@ mainsurface.fill((255, 255, 255))
 x_pos = BRICK_SEP
 y_pos = BRICK_Y_OFFSET
 bricks = pygame.sprite.Group()
+black_paddle = pygame.sprite.Group()
 for z in [RED, ORANGE, YELLOW, GREEN, CYAN]:
     for y in range(2):
         for x in range(BRICKS_PER_ROW):
@@ -50,6 +51,7 @@ for z in [RED, ORANGE, YELLOW, GREEN, CYAN]:
         y_pos = y_pos + BRICK_HEIGHT + 4
         x_pos = BRICK_SEP
 p = paddle.Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, BLACK)
+black_paddle.add(p)
 p.rect.y = y_pos + 400 - PADDLE_Y_OFFSET
 p.rect.x = x_pos + APPLICATION_WIDTH/2 - 35
 mainsurface.blit(p.image, p.rect)
@@ -64,8 +66,11 @@ while True:
     mainsurface.blit(p.image, p.rect)
     red_ball.move()
     mainsurface.blit(red_ball.image, red_ball.rect)
+    red_ball.collide(black_paddle)
+    red_ball.collide(bricks)
     for event in pygame.event.get():
        if event.type == QUIT:
            pygame.quit()
            sys.exit()
     pygame.display.update()
+    time.tick(60)
